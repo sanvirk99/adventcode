@@ -1,4 +1,4 @@
-
+import time
 
 # %%
 file=open('./input/day7.txt','r')
@@ -16,8 +16,9 @@ def concat(x,y):
     val =str(x) + str(y)
     return int(val)
 
+
 def dfs(sum,cur,arr,i):
-    if i == len(arr):
+    if i == len(arr) or cur > sum:
         if cur == sum:
             res.append(sum)
             return True
@@ -32,10 +33,15 @@ def dfs(sum,cur,arr,i):
         
     return dfs(sum,cur+arr[i],arr,i+1)
 
+
+# Timing the execution
+start_time = time.time()
 for eq in eqs:
     total,arr = eq
     if len(arr) == 0:
         assert False
     dfs(total,arr[0],arr,1)
 
+end_time = time.time()
 print(sum(res))
+print(f"Execution time: {end_time - start_time} seconds")
