@@ -18,7 +18,9 @@ def concat(x,y):
 
 
 def dfs(sum,cur,arr,i):
-    if i == len(arr) or cur > sum:
+    if cur > sum:
+        return False
+    if i == len(arr):
         if cur == sum:
             res.append(sum)
             return True
