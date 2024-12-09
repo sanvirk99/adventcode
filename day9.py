@@ -65,17 +65,11 @@ def part2():
                 t1.append('.')
             heapq.heappush(free_spaces,((start+1),abs(start-(len(t1)))))
    
-    # print(locs)
-    # print(free_spaces)
-    #print(t1) 
+  
     while locs:
-        # print(len(locs))
         id , lo , pos = heapq.heappop(locs)
-        # print(abs(id),lo)
-        res=[]
         for index,space in enumerate(free_spaces):
             start, lf = space
-            
             if lo <= lf and start < pos:
                # print(start,lf , "freespace")
                 for i in range(start,start+lo-1):
@@ -90,13 +84,7 @@ def part2():
                 else:
                     del free_spaces[index]
                 break 
-        heapq.heapify(free_spaces)
-        # print(free_spaces)
-        #print(t1)
   
-    # while True:
-
-    #     start,end=heapq.heappop(free_spaces)
     count=0 
     for i in range(len(t1)):
         if t1[i] == '.':
