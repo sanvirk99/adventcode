@@ -48,6 +48,7 @@ def part1():
     pass
 
 import heapq
+import time
 def part2():
     t1=[]
     free_spaces=[]
@@ -84,7 +85,7 @@ def part2():
                 else:
                     del free_spaces[index]
                 break 
-  
+      
     count=0 
     for i in range(len(t1)):
         if t1[i] == '.':
@@ -94,5 +95,20 @@ def part2():
 
     pass
 
-#part1()
+start_time = time.time()
+
+part1()
+
+mid_time = time.time()
+
 part2()
+
+end_time = time.time()
+
+part1_execution_time = mid_time - start_time
+part2_execution_time = end_time - mid_time
+total_execution_time = end_time - start_time
+
+print(f"Part 1 execution time: {part1_execution_time} seconds")
+print(f"Part 2 execution time: {part2_execution_time} seconds")
+print(f"Total execution time: {total_execution_time} seconds")
