@@ -76,12 +76,12 @@ def part2():
             if not ((prev+1) == input[i][j]):
                 return
             
-            visted.add((i,j))
+            #visted.add((i,j))
         
 
             if input[i][j] == 9:
                 res[0]+=1
-                visted.remove((i,j))
+                #visted.remove((i,j))
                 return
             
             dfs(i + 1, j, input[i][j])
@@ -89,7 +89,7 @@ def part2():
             dfs(i, j + 1, input[i][j])
             dfs(i, j - 1, input[i][j])
 
-            visted.remove((i,j))
+            #visted.remove((i,j))
 
         dfs(i + 1, j, input[i][j])
         dfs(i - 1, j, input[i][j])
