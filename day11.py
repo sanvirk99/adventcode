@@ -1,5 +1,5 @@
 file=open('./input/day11.txt','r')
-
+import time
 
 input=[]
 with file as f:
@@ -32,17 +32,47 @@ def flatten(arr):
 
 
 
+def part1(arr,blinks):
 
-big_arr=[]
-for num in input:
-    res=[num]
-    for i in range(25):
-        arr=[]
-        for num in res:
-            arr.append(rules(num))
-        res=flatten(arr)
-    big_arr.append(len(res))
-    
+    for i in range(blinks):
+        res=[]
+        for num in arr:
+            res.append(rules(num))
+        arr=flatten(res)
+        #print(i)
+
+    #print(len(input))
+    return len(arr)
+
+ 
+
+def part2(input,blinks):
+
+    mem={}
+    def dfs(num,i):
+
+        
+        if i == 0:
+            return 1
+        
+        if (num,i) in mem:
+            return mem[(num,i)]
+        
+        count=0
+        arr=rules(num)
+        for n in arr:
+            count+=dfs(n,i-1)
+
+        mem[(num,i)] = count
+        return count 
 
 
-print(sum(big_arr))
+    count=0
+    for num in input:
+        count+=dfs(num,blinks)
+    #print(count)
+    return count
+
+
+#print(part1(input,25))
+print(part2(input,75))
