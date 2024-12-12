@@ -74,5 +74,11 @@ def part2(input,blinks):
     return count
 
 
+start_time = time.time()
+
 #print(part1(input,25))
 print(part2(input,75))
+
+end_time = time.time()
+execution_time = end_time - start_time
+print(f"Execution time: {execution_time} seconds")
