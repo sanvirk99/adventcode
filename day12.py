@@ -94,8 +94,8 @@ def part2():
         
         for key in sides:
             set_sides=sides[key].copy()
-            for side in set_sides:
-                x,y=side
+            for point in set_sides:
+                x,y=point
                 if (x,y) not in sides[key]:
                     continue #already removed
                 xk,yk=key
