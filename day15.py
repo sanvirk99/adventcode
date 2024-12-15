@@ -34,7 +34,7 @@ def draw():
 def draw2():
     for row in input2:
         print((' '.join(row)))
-# print(moves)
+#print(moves)
 
 directions={
     '>':(0,1),
@@ -72,7 +72,6 @@ def part1():
                 break
         if found:
             break
-    print(rx,ry)
     for mov in moves:
         dir=mov
         dx,dy=directions[dir]
@@ -100,11 +99,28 @@ directions={
 }
 
 def part2():
-    print('width',len(input2[0]))
+    #print('width',len(input2[0]))
     #draw2()
 
     dir=None
-    def dfs(i,j,prev):
+    def dfsvalid(i,j):
+        cur=input2[i][j]
+        if input2[i][j] == '#':
+            return False
+        if input2[i][j] == '.':
+            return True        
+        dx,dy=directions[dir]
+        if dir == '^' or dir == 'v':
+            if cur == '[' and dfsvalid(i+dx,j+dy) and dfsvalid(i+dx,j+1+dy):
+                return True
+            if cur == ']' and dfsvalid(i+dx,j+dy) and dfsvalid(i+dx,j-1+dy):
+                return True
+        else: 
+            if dfs(i+dx,j+dy):
+                return True
+        return False
+    
+    def dfs(i,j):
         cur=input2[i][j]
         if input2[i][j] == '#':
             return False
@@ -113,22 +129,21 @@ def part2():
         dx,dy=directions[dir]
         
         if dir == '^' or dir == 'v':
-            if cur == '[' and dfs(i+dx,j+dy,input2[i][j]) and dfs(i+dx,j+1+dy,input2[i][j+1]):
+            if cur == '[' and dfs(i+dx,j+dy) and dfs(i+dx,j+1+dy):
                 input2[i+dx][j+dy]=input2[i][j]
                 input2[i][j]='.'
                 input2[i+dx][j+1+dy]=input2[i][j+1]
                 input2[i][j+1]='.'
                 return True
 
-
-            if cur == ']' and dfs(i+dx,j+dy,input2[i][j]) and dfs(i+dx,j-1+dy,input2[i][j-1]):
+            if cur == ']' and dfs(i+dx,j+dy) and dfs(i+dx,j-1+dy):
                 input2[i+dx][j+dy]=input2[i][j]
                 input2[i][j]='.'
                 input2[i+dx][j-1+dy]=input2[i][j-1]
                 input2[i][j-1]='.'
                 return True
         else: 
-            if dfs(i+dx,j+dy,input2[i][j]):
+            if dfs(i+dx,j+dy):
                 input2[i+dx][j+dy]=input2[i][j]
                 input2[i][j]='.'
                 return True
@@ -146,17 +161,19 @@ def part2():
                 break
         if found:
             break
-    print(rx,ry)
-    for mov in moves:
+    #print(rx,ry)
+    for i,mov in enumerate(moves):
         dir=mov
         dx,dy=directions[dir]
-        #print('//////',mov,rx,ry)
-        if dfs(rx+dx,ry+dy,'@'):
+        
+        
+        if dfsvalid(rx+dx,ry+dy):
+            dfs(rx+dx,ry+dy)
             input2[rx+dx][ry+dy]=input2[rx][ry]
             input2[rx][ry]='.'
             rx=rx+dx
             ry=ry+dy
-        #draw2()
+     
     count=0
     for i in range(len(input2)):
     
@@ -164,8 +181,9 @@ def part2():
             if input2[i][j] == '[':
                 assert (input2[i][j+1] == ']')
                 count += i * 100 + j
+            if input2[i][j] == ']':
+                assert (input2[i][j-1] == '[')
     print(count)
-    draw2()
 
 part1()
 part2()
