@@ -1,3 +1,109 @@
-211692000
-part1() execution time: 0.007812023162841797 seconds
-part2() execution time: 0.0 seconds
+part1() execution time: 0.0 seconds
+                                                                                                                                                                    x                                 x  
+                                                                                                                                                                                                         
+                                                            x                         x                                                                                                                  
+  x           x                                                                           x                                                                                                              
+                      x                                           x   x                                                                                                                                  
+                                                                                          x     x                                                         x                                             x
+                                                                                                                                                                                                         
+                                                                                                        x                                                                                                
+                        x                                           x                                                                                                                                    
+                                                                                                                                                                                                         
+                                                                                                                                    x                                                                    
+                                                                                                x                 x                                         x                                            
+                            x                 x                           x                                                                               x                                              
+                                                                                                                                                                                                         
+          x               x                                                                                                                         x                                                    
+                                              x                                                                                                                                                          
+                                                                                                                    x                                                                                    
+  x                                                                                                                                                                                                      
+                                                                                                                                                                                                         
+                                                                                                                      x                                                                                  
+                                                                        x                                                                                           x                                    
+                                      x                                                                                                                                                                  
+x                               x           x                 x                                                                                                                       x     x            
+                                                                                                                                                                                                         
+    x                                                                                                                             x                                                       x     x        
+                                      x                                                                                                                                                                  
+                                                                                                                                                                                                         
+                x                                                                                             x                                                                               x          
+                                                                                                                                                                                                         
+                                                                                                                                                                                                         
+                                                                                                          x                                 x                   x                                        
+                      x                                           x               x                                                                                                                      
+x                                                                                                                                                                                                        
+                          x                                                     x                 x                                                                                                      
+                                    x                                               x                                                                                                                    
+                                    x                                                                                                                                                                    
+                                                                                            x                                                                                                            
+                                                                                                                                x                                                                        
+                                                                                                            x                                                                                            
+                                                                                                                                                                                                         
+                                                                                                        x                                                                               x                
+      x                                           x                               x                                 x                                                                                    
+                                                                                                                                                                                        x                
+                                                                      x                                                                               x                                                  
+                                                                        x                                                                                                                                
+                                                      x                                                                                                                                                  
+                                                                                                                                                                                                         
+                                                                  x             x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x                                                            
+                        x                                                       x                                                           x                                                            
+                                                                                x                                                           x                     x                                      
+                                                                                x                                                           x                                                            
+                                        x                                       x                                                           x                                                            
+                                                                                x                             x                             x                                                            
+                                                                                x                           x x x                           x                                       x                    
+                                                                                x                         x x x x x                         x                                                            
+                                                                            x   x                       x x x x x x x                       x                                                            
+                                                                                x                     x x x x x x x x x                     x                                                            
+                                                                                x                         x x x x x                         x                                                            
+                          x                                                     x                       x x x x x x x                       x                       x                   x                
+          x     x                                                               x                     x x x x x x x x x                     x           x                                                
+              x                 x                                               x                   x x x x x x x x x x x                   x                                                            
+                                                                                x                 x x x x x x x x x x x x x                 x                                                            
+  x       x                                                                     x                     x x x x x x x x x                     x                                                            
+                                                                                x                   x x x x x x x x x x x                   x               x                                            
+                                  x                                             x                 x x x x x x x x x x x x x                 x                                                            
+            x                                             x                     x               x x x x x x x x x x x x x x x               x                                                            
+x                                                                               x             x x x x x x x x x x x x x x x x x             x                                                            
+                                                                                x                 x x x x x x x x x x x x x                 x         x                                                  
+          x                                                                     x               x x x x x x x x x x x x x x x               x                                                            
+                                                                                x             x x x x x x x x x x x x x x x x x             x                                                            
+                                                                                x           x x x x x x x x x x x x x x x x x x x           x                                                            
+                                  x                                             x         x x x x x x x x x x x x x x x x x x x x x         x                                       x                    
+                                                                                x                           x x x                           x                                                            
+                            x                                                   x                           x x x                           x                                                            
+                                                                                x                           x x x                           x                         x                                  
+                                                                                x                                                           x                                                            
+                                                                                x                                                           x                                                            
+                                                                                x                                                           x       x                                                    
+                                                                                x                                                           x                         x                                  
+                                                                                x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x x                                                            
+                                                      x                                                                                                                                                  
+                        x                                                                                                                                                                                
+                                                                                                                                    x                                                                    
+                                                            x                                                                                                         x                                  
+                                                                                                        x                                                                                                
+                                                                      x                                                                                                                                  
+                                                                                                                        x                                                                                
+                                                        x               x                                                                                                                                
+                                                                                                              x                                                                                          
+                                                    x   x                                                                                                 x                                   x          
+                    x                                                                                   x                         x                                                                      
+                                                                                                                      x                                                     x                            
+                                      x             x                                                                                                                                                    
+          x                                                   x                                                                 x x                                                                      
+                                            x                                                                                 x                                                                       x  
+                                                                              x               x                                                                           x                              
+                                                                                                                                            x                                   x                        
+                                                                                                                                                x                                                        
+                                                                                                                                                                                                         
+                    x                                                                                                               x                                                                    
+                        x                                 x                                                                                                               x                              
+                            x               x                                                                                                                                                            
+                                                                                                                                                                                                         
+empty space  9903
+filled space  500
+6586
+6587
+part2() execution time: 8.421323776245117 seconds
