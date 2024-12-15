@@ -1,0 +1,3 @@
+211692000
+part1() execution time: 0.007812023162841797 seconds
+part2() execution time: 0.0 seconds

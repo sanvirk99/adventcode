@@ -64,9 +64,7 @@ def part1():
 def part2Iterative():
     
     cur={}
-    
-    
-    
+
     def dfs(x,y,a,b):
 
         stack=[]
