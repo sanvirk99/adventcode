@@ -80,7 +80,7 @@ def part1Test():
             if dir == key: # same directoin
                 movecost=cost+1
             else:
-                movecost=cost+1000+1
+                movecost=cost+1000
             
             res=dfs(i+x,j+y,key,movecost)
             if res:
@@ -103,10 +103,6 @@ def part1Test():
         print(len(paths[-1]))
     print(mincost)
 
-
-
-import heapq
-
 class Node:
     def __init__(self,x,y,cost=sys.maxsize,direction=None,parent=None):
         self.x=x
@@ -117,6 +113,7 @@ class Node:
     
 
 import heapq
+from collections import defaultdict
 def part1():
     def createGraph():
         nodes={}
@@ -162,9 +159,53 @@ def part1():
   
     print(nodes[(endx,endy)].cost)  
     
-            
         
-    #dfs()
-#part1Test()
 part1()
 
+import heapq
+sd = 0
+dirs = [(0,1),(1,0),(0,-1),(-1,0)]
+
+def adjs(cur):
+    cx,cy,dir = cur
+
+    yield 1000, (cx,cy,((dir+1)%4))
+    yield 1000, (cx,cy,((dir-1)%4))
+    dx,dy = dirs[dir]
+    fx,fy=cx+dx,cy+dy
+    if input[fx][fy] != '#':
+        yield 1,(fx,fy,dir)
+
+
+start = (startx,starty,0)
+heap = []
+heapq.heappush(heap,(0,start))
+dists = defaultdict(lambda: float('inf'))
+parents = defaultdict(lambda: set())
+
+while heap:
+    dist,cur = heapq.heappop(heap)
+    (cx,cy,dir) = cur
+    if cur == (endx,endy):
+        continue
+    for d,adj in adjs(cur):
+        if dist + d < dists[adj]:
+            dists[adj] = dist + d
+            parents[adj]={cur}
+            heapq.heappush(heap,(dist+d,adj))
+        elif dist + d == dists[adj]:
+            parents[adj].add(cur)
+
+for dir in range(4):
+    print(dists[(endx,endy,dir)])
+stack = [(endx,endy,1)]
+visited = set(stack)
+while stack:
+    cur = stack.pop()
+    for parent in parents[cur]:
+        if parent not in visited:
+            stack.append(parent)
+            visited.add(parent)
+
+visited = set(x[:2] for x in visited)
+print(len(visited))
