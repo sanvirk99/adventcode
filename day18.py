@@ -44,22 +44,38 @@ def part1():
                 dist[i,j]=d+1
                 parent[i,j]=(x,y)
                 heapq.heappush(que,(dist[i,j],i,j))
-    if dist[ei,ej] == float('inf'):
-        draw()
-    
-    return dist[ei,ej]
+    # if dist[ei,ej] == float('inf'):
+    #     draw()
 
-print(part1())
+    stack=[(ei,ej)]
+    visited=set()
+    while stack:
+        x,y=stack.pop()
+        if (x,y) in visited:
+            continue
+        visited.add((x,y))
+        if (x,y) not in parent:
+            break
+        stack.append(parent[x,y])
+    
+    return dist[ei,ej],visited
+
+steps,path = part1()
+print(steps)
 
 
 ##part 2
+#another approach is to just do a dfs from the end to start or start to end after adding
+# the cordinate
 res=None
 for byte in remaining:
 
     x,y = byte
     cord[x][y] = '#'
-    steps=part1()
-    print(steps)
+    if (x,y) not in path:
+        continue
+    steps,path=part1()
+    #print(steps)
     if steps == float('inf'):
         res=(x,y)
         break
