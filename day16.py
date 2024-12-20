@@ -202,10 +202,14 @@ stack = [(endx,endy,1)]
 visited = set(stack)
 while stack:
     cur = stack.pop()
+    input[cur[0]][cur[1]] = 'O'
     for parent in parents[cur]:
         if parent not in visited:
             stack.append(parent)
             visited.add(parent)
 
+draw()
+for dir in range(4):
+    print(dists[(7,5,dir)])
 visited = set(x[:2] for x in visited)
 print(len(visited))

@@ -1,4 +1,3 @@
-import re
 patterns=set()
 towels=[]
 max_pattern=0
@@ -30,22 +29,15 @@ def part1():
                 if dfs(towel[len(pattern):]):
                     return True
         return False
-
-
     count=0
     for towel in towels:
-
         if dfs(towel):
             #print(towel)
             count+=1
-
     print(count)
 
 #part1()
-
-
 def part2():
-    
     mem={}
     def dfs(towel):
         #print(towel)
@@ -64,8 +56,6 @@ def part2():
         print(i)
         res+=dfs(towel)
         mem={}
-        
-    #dfs('bggwbgrwuguugubbuuubgrwgubgwgugrbuwguuwgugggburgurwbwgbwrg')
     print(res)
 
 
