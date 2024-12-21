@@ -9,14 +9,12 @@ with file as f:
         for e in line:
             row.append(e)
         input.append(row)
-
 for i in range(len(input)):
     for j in range(len(input[0])):
         if input[i][j] == 'S':
             startx,starty=i,j
         if input[i][j] == 'E':
             endx,endy=i,j
-
 def draw(input):
     for row in input:
         print(''.join(row))
@@ -64,34 +62,12 @@ orginal_path,dist=dijkstra(input)
 #idea is to relax past a edge and see if leads to reduce time
 total=dist[endx,endy]
 
-
-
-# def cheatcords(ci,cj):
-
-#     visted=set()
-#     def dfs(time):
-#         nonlocal ci,cj
-#         di,dj = cur
-#         if time <= 0:
-#             return
-#         if cur in visted:
-#             return
-#         visted.add(cur)
-#         if dist[ci,cj]+time < dist[di,dj]: 
-#             shortcut[(dist[di,dj] - (dist[ci,cj]+time))]+=1
-#         for dir in directions:
-#             i,j=dir
-#             dfs(time-1,(cur[0]+i,cur[1]+j))
-
-#     dfs(20)
-
 cheatspace=defaultdict(lambda: [])
 
 for i in range(-20,21):
     for j in range(-20,21):
         if abs(i) + abs(j) <= 20 and (abs(i) >= 2 or abs(j) >=2):
             cheatspace[abs(i) + abs(j)].append((i,j))
-
 
 
 def part1():
@@ -107,14 +83,10 @@ def part1():
                 continue
             if dist[ci,cj]+2 < dist[di,dj]: 
                 shortcut[(dist[di,dj] - (dist[ci,cj]+2))]+=1
-
-
     cheats=0
     for key in shortcut:
-
         if key >= 100:
             cheats+=shortcut[key]
-
     print(cheats) 
 
 
@@ -128,8 +100,6 @@ def part2():
     cheats=defaultdict(lambda: 0)
     def bestincheatspace(cord):
         ci,cj=cord
-
-        
         for key in cheatspace:
             for point in cheatspace[key]:
                 i,j=point
@@ -138,12 +108,8 @@ def part2():
                     continue
                 if dist[ci,cj]+key < dist[di,dj]: 
                     cheats[(dist[di,dj] - (dist[ci,cj]+key))]+=1
-
-
-
     for cord in orginal_path:
         bestincheatspace(cord)
-
     keys = sorted(cheats.keys(),reverse=True)
     part2=0
     for cheat in keys:
