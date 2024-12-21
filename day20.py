@@ -63,26 +63,96 @@ def dijkstra(input):
 orginal_path,dist=dijkstra(input)
 #idea is to relax past a edge and see if leads to reduce time
 total=dist[endx,endy]
-shortcut=defaultdict(lambda : 0)
-for cord in orginal_path:
+
+
+
+# def cheatcords(ci,cj):
+
+#     visted=set()
+#     def dfs(time):
+#         nonlocal ci,cj
+#         di,dj = cur
+#         if time <= 0:
+#             return
+#         if cur in visted:
+#             return
+#         visted.add(cur)
+#         if dist[ci,cj]+time < dist[di,dj]: 
+#             shortcut[(dist[di,dj] - (dist[ci,cj]+time))]+=1
+#         for dir in directions:
+#             i,j=dir
+#             dfs(time-1,(cur[0]+i,cur[1]+j))
+
+#     dfs(20)
+
+cheatspace=defaultdict(lambda: [])
+
+for i in range(-20,21):
+    for j in range(-20,21):
+        if abs(i) + abs(j) <= 20 and (abs(i) >= 2 or abs(j) >=2):
+            cheatspace[abs(i) + abs(j)].append((i,j))
+
+
+
+def part1():
+    shortcut=defaultdict(lambda : 0)
+    for cord in orginal_path:
+        ci,cj=cord
+        for dir in directions:
+            i,j=dir
+            i*=2
+            j*=2    
+            di,dj=ci+i,cj+j
+            if (di,dj) not in dist: #another wall
+                continue
+            if dist[ci,cj]+2 < dist[di,dj]: 
+                shortcut[(dist[di,dj] - (dist[ci,cj]+2))]+=1
+
+
+    cheats=0
+    for key in shortcut:
+
+        if key >= 100:
+            cheats+=shortcut[key]
+
+    print(cheats) 
+
+
+def calculateCord(cord,i,j):
     ci,cj=cord
-    for dir in directions:
-        i,j=dir
-        i*=2
-        j*=2    
-        di,dj=ci+i,cj+j
-        if (di,dj) not in dist: #another wall
-            continue
-        if dist[ci,cj]+2 < dist[di,dj]: 
-            
-            shortcut[(dist[di,dj] - (dist[ci,cj]+2))]+=1
+    ci=i+ci
+    cj=j+cj
+    return ci,cj
+
+def part2():
+    cheats=defaultdict(lambda: 0)
+    def bestincheatspace(cord):
+        ci,cj=cord
+
+        
+        for key in cheatspace:
+            for point in cheatspace[key]:
+                i,j=point
+                di,dj = calculateCord(cord,i,j)
+                if (di,dj) not in dist: #another wall
+                    continue
+                if dist[ci,cj]+key < dist[di,dj]: 
+                    cheats[(dist[di,dj] - (dist[ci,cj]+key))]+=1
 
 
-cheats=0
-for key in shortcut:
 
-    if key >= 100:
-        cheats+=shortcut[key]
+    for cord in orginal_path:
+        bestincheatspace(cord)
 
-print(cheats) 
+    keys = sorted(cheats.keys(),reverse=True)
+    part2=0
+    for cheat in keys:
+        if cheat>=100:
+            part2+=cheats[cheat]
+        else:
+            break
+    print(part2)
 
+
+part1()
+part2()
