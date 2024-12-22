@@ -24,6 +24,7 @@ for i in range(-1,2):
         if abs(i) in range(0,2) and abs(j) in range(0,3):
             dirSpace.append((i,j))
 
+#change this symboling reflect move length
 def symbolx(x):
     if x < 0:
         return '^'*abs(x)
@@ -96,7 +97,12 @@ for i in range(len(dirPad)):
             nx,ny=i+dx,j+dy
             if nx in range(len(dirPad)) and ny in range(len(dirPad[0])) and dirPad[nx][ny] != '#':
                 #print(numPad[nx][ny])
-                seq=symbolx(dx)+symboly(dy)
+                if dirPad[i][j] == '<':
+                    seq=symboly(dy)+symbolx(dx)
+                elif dirPad[i][j] == 'A':
+                    seq=symbolx(dx)+symboly(dy)
+                else:
+                    seq=symbolx(dx)+symboly(dy)
                 #print(seq)
                 dirMoves[dirPad[i][j]][dirPad[nx][ny]]=seq
 
@@ -136,12 +142,24 @@ def type(totype):
     combinations=allcombination(totype)
     minlen=float('inf')
     for seqr in combinations:
-        #print(seqr)
+        #print(seqr,len(seqr))
         from_='A'
         seqdir=''
         for next in seqr:
             seqdir+=dirMoves[from_][next]+'A'
+            print(dirMoves[from_][next]+'A', from_ , next)
             from_=next
+
+        # i=0
+        # while i < 23:
+        #     #print(seqdir,len(seqdir))
+        #     cur=seqdir
+        #     seqdir=''
+        #     for next in cur:
+        #         seqdir+=dirMoves[from_][next]+'A'
+        #         print(dirMoves[from_][next]+'A')
+        #         from_=next
+        #     i+=1
 
         from_='A'
         final_seq=''
@@ -149,19 +167,19 @@ def type(totype):
             final_seq+=dirMoves[from_][next]+'A'
             from_=next
         #print(final_seq,len(final_seq))
-
         minlen=min(minlen,len(final_seq))
+        break
     print(minlen, int(totype[:-1]))
     return minlen * int(totype[:-1])
 
 
-#type('179A')
+type('029A')
 
-def part1():
-    with open('input/day21.txt','r') as f:
-        count=0
-        for line in f:
-            count+=type(line.strip())
-            print(count)
-        print(count)
-part1()
+# def part1():
+#     with open('input/day21.txt','r') as f:
+#         count=0
+#         for line in f:
+#             count+=type(line.strip())
+#             print(count)
+#         print(count)
+#part1()
