@@ -20,9 +20,12 @@ def secretNumber(arr):
             for func,val in operations:
                 #print(func,val)
                 num=mapfunc[func](val,num)
-            
+    
             n+=1
         yield num
+
+
+
 
 nums=[]
 with open('input/day22.txt','r') as f: 
