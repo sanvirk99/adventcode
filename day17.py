@@ -27,10 +27,17 @@ regisMap={
     'B' : 1,
     'C' : 2,
 }
+regisMapRev={
+     0 : 'A',
+     1 :'B',
+     2 : 'C',
+}
+
 
 def comboOpRegister(op):
 
     if op in range(4,7):
+        
         return store[op-4]
     return op            
 
@@ -74,7 +81,11 @@ def bxc(op):
     instruction_pointer+=1
         
 def out(op):
-    outs.append(comboOpRegister(op)%8)
+    print(regisMapRev[op-4])
+    print(bin(comboOpRegister(op)))
+    out=comboOpRegister(op)%8
+    outs.append(out)
+    print(bin(out))
     global instruction_pointer
     instruction_pointer+=1
     
@@ -124,8 +135,8 @@ while 0 <= instruction_pointer < len(ops):
     opcode,oprand=ops[instruction_pointer]
     #print(opcode,oprand)
     opcode_functions[opcode](oprand)
-    print(opcode_mapping[opcode],comboOpRegister(oprand), '->' , store, '->', ','.join(map(str,outs) ))
-
+    print((opcode,oprand),opcode_mapping[opcode],comboOpRegister(oprand), '->' , store)
+    print(','.join(map(str,outs)))
 
 
 comma_separated_string = ','.join(map(str,outs))
