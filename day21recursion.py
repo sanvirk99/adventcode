@@ -176,7 +176,6 @@ def chainRobot(letter,prev,end,seqstart):
         mincount=float('inf')
         if start:
             prev='A'
-        #minmove=''
         for index, move in enumerate(dirMoves[prev][letter]):
             count=0
             cur=prev
@@ -187,15 +186,10 @@ def chainRobot(letter,prev,end,seqstart):
                 cur=each
             if count < mincount:
                 mincount=min(mincount,count)
-                minmove=move
-
         mem[(letter,prev,i,start)] = mincount
-        #print(minmove)
         return mincount
 
     return dfs(letter,prev,0,seqstart)
-
-
 
 def type(totype,depth):
 
