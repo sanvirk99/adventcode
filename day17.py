@@ -143,29 +143,3 @@ comma_separated_string = ','.join(map(str,outs))
 print(comma_separated_string)
 
 
-
-
-
-# #51000000
-# count=51000000
-# while True:
-
-#     instruction_pointer=0
-#     outs=[]
-#     store=storecopy.copy()
-#     store[0]=count
-
-#     while 0 <= instruction_pointer < len(ops):
-#         opcode,oprand=ops[instruction_pointer]
-#         #print(opcode,oprand)
-#         opcode_functions[opcode](oprand)
-#         # print(instruction_pointer , opcode) 
-
-#     if  program_string == ','.join(map(str,outs)):
-#         print(count)
-#         print(program_string)
-#         break
-#     if count%100000 == 0:
-#         print(count)
-#     count+=1
-# print(count , 'register a value')

@@ -1,7 +1,4 @@
-
-from collections import defaultdict
-from itertools import permutations
-
+# %%
 numPad=[
     ['7','8','9'],
     ['4','5','6'],
@@ -62,7 +59,8 @@ def validate(grid,cur,end,seq):
     return dfs(cur,0)
 
 #precalculate all different moves from a poisiton
-
+from collections import defaultdict
+from itertools import permutations
 numMoves=defaultdict(lambda: defaultdict())
 for i in range(len(numPad)):
     for j in range(len(numPad[0])):
@@ -76,11 +74,8 @@ for i in range(len(numPad)):
                 perm=list(permutations(seq1))
                 unique=set()
                 for p in perm:
-                   
-                    if validate(numPad,(i,j),(nx,ny),''.join(p)): 
-                        temp=list(p)
-                        temp.append('A')
-                        unique.add(''.join(temp))
+                    if validate(numPad,(i,j),(nx,ny),''.join(p)):
+                        unique.add(''.join(p))
                 numMoves[numPad[i][j]][numPad[nx][ny]]=unique
 
 dirMoves=defaultdict(lambda: {})
@@ -97,17 +92,18 @@ for i in range(len(dirPad)):
                 unique=set()
                 for p in perm:
                     if validate(dirPad,(i,j),(nx,ny),''.join(p)):
-                        temp=list(p)
-                        if not temp:
-                            temp=['A']
-                        else:
-                            temp.append('A')
-                        #print(print(temp),'dir')
-                        unique.add(''.join(temp))
+                        unique.add(''.join(p))
 
                 dirMoves[dirPad[i][j]][dirPad[nx][ny]]=unique
 
-# generate all combinaition of numpad 
+for each in numMoves:
+    print(each,numMoves[each])
+for each in dirMoves:
+    print(each , dirMoves[each])
+
+
+
+# %%
 def allcombination(totype):
     res=[]
     def dfs(totype,combo,from_):
@@ -116,14 +112,13 @@ def allcombination(totype):
             res.append(combo)
             return
         for move in numMoves[from_][totype[0]]:
-            choice=combo+move
+            choice=combo+move+'A'
             dfs(totype[1:],choice,totype[0])
 
     dfs(totype,'','A')
     #print(res)    
     return res
 
-#generate all combination of dirpad to type directions < ^ v > A 
 def dircombinations(totype):
     res=[]
     def dfs(totype,combo,from_):
@@ -132,7 +127,7 @@ def dircombinations(totype):
             res.append(combo)
             return
         for move in dirMoves[from_][totype[0]]:
-            choice=combo+move
+            choice=combo+move+'A'
             dfs(totype[1:],choice,totype[0])
 
     dfs(totype,'','A')
@@ -140,75 +135,75 @@ def dircombinations(totype):
     return res
 
 
-def chainRobot(letter,prev,end,seqstart):
+def chainvisual(seq,end):
+    minlen=float('inf')
+    minseq=''
+    def dfs(seq,i):
+        print(seq,len(seq))
+        if i == end:
+            nonlocal minseq,minlen
+            if len(seq) < minlen:
+                minseq=seq
+                minlen=len(seq)
+            return
+        for combo in dircombinations(seq):
+            #print(combo)
+            dfs(combo,i+1)
+        
+
+    dfs(seq,0)
+    print(minseq)
+    return minlen
+
+
+from visualiser.visualiser import Visualiser as vs
+
+from collections import defaultdict
+tree=defaultdict(lambda : [])
+def chainRobot(letter,prev,end):
     
     mem={}
-    
-    def dfs(letter,prev,i,start):
-       # print(letter,prev,i)
+    @vs()
+    def dfs(letter,prev,i):
+        print(letter,prev,i)
         if i == end:
             return 1
-        if (letter,prev,i,start) in mem:
-            return mem[(letter,prev,i,start)]
+        # if (letter,prev,i) in mem:
+        #     return mem[(letter,prev,i)]
         mincount=float('inf')
-        if start:
-            prev='A'
-        #minmove=''
         for index, move in enumerate(dirMoves[prev][letter]):
+            move+='A'
             count=0
-            cur=prev
-            begin=True
+            cur='A'
             for each in move:
-                count+=dfs(each,cur,i+1,begin)
-                begin=False
+                count+=dfs(each,cur,i+1)
                 cur=each
             if count < mincount:
                 mincount=min(mincount,count)
-                minmove=move
 
-        mem[(letter,prev,i,start)] = mincount
-        #print(minmove)
+
+        mem[(letter,prev,i)] = mincount
         return mincount
-
-    return dfs(letter,prev,0,seqstart)
-
-
-
-def type(totype,depth):
-
-    combinations=allcombination(totype)
-    minlen=float('inf')
-    for seq in combinations:
-        prev='A'
-        start=True
-        res=0
-        for letter in seq: #repersent 029A
-            res+=chainRobot(letter,prev,depth,start)
-            start=False
-            prev=letter
-        minlen=min(res,minlen)
-    return minlen*int(totype[:-1])
-
-exampleinputs=['029A','980A','179A','456A','379A']
-
-def part1():
-    count=0
-    for input in exampleinputs:
-        count+=type(input,depth=2) #two directional robots
-    
-    print(count)
-        
-part1()
-
-
-
-
-
-
-
-
     
 
+    return dfs(letter,prev,0)
 
+
+#chainvisual('<',1)
+#print(chainRobot('<','A',2))
+
+res=0
+prev='A'
+root='root'
+for num,letter in enumerate('<'):
+    res+=chainRobot(letter,prev,3)
+    prev=letter
+print(res)
+
+#vs.make_animation("pad.gif", delay=2)
+vs.write_image("pad.png")
+
+
+# %
 
 

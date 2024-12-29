@@ -2,7 +2,7 @@ import re
 from collections import defaultdict
 from itertools import combinations 
 import networkx as nx
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 graph=defaultdict(lambda : [])
 g=nx.Graph()
@@ -37,7 +37,7 @@ def part1():
 
     print(len(res))
     
-part1()
+#part1()
 
 totalV=len(graph.keys())
 def part2():
@@ -71,6 +71,7 @@ def part2():
         stack.pop()
     maxkey=None
     maxvalue=0
+
     for key,value in sets.items():
         if len(key) == value:
             if value > maxvalue:
@@ -79,4 +80,12 @@ def part2():
     
     print(','.join(maxkey))
 
+import time
+
+# Measure execution time of part2()
+start_time = time.time()
 part2()
+end_time = time.time()
+
+elapsed_time = end_time - start_time
+print(f"Execution time of part2(): {elapsed_time:.6f} seconds")

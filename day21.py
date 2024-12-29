@@ -1,5 +1,3 @@
-
-
 numPad=[
     ['7','8','9'],
     ['4','5','6'],
@@ -108,10 +106,6 @@ for i in range(len(dirPad)):
 
 
 
-assert (validate(numPad,(3,2),(2,0),'<<^^')) == False
-assert (validate(numPad,(3,2),(2,0),'<^<^')) == True
-
-
 def allcombination(totype):
     res=[]
     def dfs(totype,combo,from_):
@@ -136,44 +130,151 @@ def allcombination(totype):
 # for from_ in dirMoves:
 #     print(from_,dirMoves[from_])
 def type(totype):
+    print('type1')
     from_='A'
     seqr=''
     
     combinations=allcombination(totype)
     minlen=float('inf')
+    
     for seqr in combinations:
         #print(seqr,len(seqr))
         from_='A'
         seqdir=''
         for next in seqr:
             seqdir+=dirMoves[from_][next]+'A'
-            print(dirMoves[from_][next]+'A', from_ , next)
             from_=next
 
-        # i=0
-        # while i < 23:
-        #     #print(seqdir,len(seqdir))
-        #     cur=seqdir
-        #     seqdir=''
-        #     for next in cur:
-        #         seqdir+=dirMoves[from_][next]+'A'
-        #         print(dirMoves[from_][next]+'A')
-        #         from_=next
-        #     i+=1
-
+        #print(seqdir,len(seqdir))
         from_='A'
         final_seq=''
         for next in seqdir:
             final_seq+=dirMoves[from_][next]+'A'
             from_=next
-        #print(final_seq,len(final_seq))
+        print(final_seq,len(final_seq))
         minlen=min(minlen,len(final_seq))
-        break
+
     print(minlen, int(totype[:-1]))
     return minlen * int(totype[:-1])
 
+def type21(totype):
+    print('type2 orginal')
+    from_='A'
+    seqr=''
+    
+    combinations=allcombination(totype)
+    minlen=float('inf')
+    
+    minseqdir=''
+    for seqr in combinations:
+        print(seqr, len(seqr))
+        from_='A'
+        seqdir=''
+        for next in seqr:
+            seqdir+=dirMoves[from_][next]+'A'
+            from_=next
+        
+        print(seqdir,len(seqdir))
 
-type('029A')
+        from_='A'
+        rseqdir=''
+        for next in seqdir:
+            rseqdir+=dirMoves[from_][next]+'A'
+            from_=next
+
+        print(rseqdir,len(rseqdir))
+
+
+        from_='A'
+        rrseqdir=''
+        for next in rseqdir:
+            rrseqdir+=dirMoves[from_][next]+'A'
+            from_=next
+
+        print(rrseqdir,len(rrseqdir))
+
+        from_='A'
+        rrrseqdir=''
+        for next in rrseqdir:
+            rrrseqdir+=dirMoves[from_][next]+'A'
+            from_=next
+
+        print(rrrseqdir,len(rrrseqdir))
+
+        from_='A'
+        final_seq=''
+        for next in rrrseqdir:
+            final_seq+=dirMoves[from_][next]+'A'
+            from_=next
+        print(final_seq,len(final_seq))
+        minlen=min(minlen,len(final_seq))
+        #print(seqdir,len(seqdir))
+
+
+    print(minlen)
+
+def type2(totype):
+    print('type2 mofified')
+    from_='A'
+    seqr=''
+    
+    #combinations=allcombination(totype)
+    minlen=float('inf')
+    
+    minseqdir=''
+    combinations=[['<','A']]
+    for seqr in combinations:
+        print(seqr, len(seqr))
+        from_='A'
+        seqdir=''
+        for next in seqr:
+            seqdir+=dirMoves[from_][next]+'A'
+            from_=next
+        
+        print(seqdir,len(seqdir))
+
+        from_='A'
+        rseqdir=''
+        for next in seqdir:
+            rseqdir+=dirMoves[from_][next]+'A'
+            from_=next
+
+        print(rseqdir,len(rseqdir))
+
+
+        from_='A'
+        rrseqdir=''
+        for next in rseqdir:
+            rrseqdir+=dirMoves[from_][next]+'A'
+            from_=next
+
+        print(rrseqdir,len(rrseqdir))
+
+        from_='A'
+        rrrseqdir=''
+        for next in rrseqdir:
+            rrrseqdir+=dirMoves[from_][next]+'A'
+            from_=next
+
+        print(rrrseqdir,len(rrrseqdir))
+
+        from_='A'
+        final_seq=''
+        for next in rrrseqdir:
+            final_seq+=dirMoves[from_][next]+'A'
+            from_=next
+        print(final_seq,len(final_seq))
+        minlen=min(minlen,len(final_seq))
+        #print(seqdir,len(seqdir))
+
+
+    print(minlen)
+    # return len(final_seq) * int(totype[:-1])
+
+#type('379A')
+type21('029A')
+type2('0')
+#type2('37')
 
 # def part1():
 #     with open('input/day21.txt','r') as f:
@@ -182,4 +283,22 @@ type('029A')
 #             count+=type(line.strip())
 #             print(count)
 #         print(count)
-#part1()
+# part1()
+
+
+# def part2():
+#     with open('input/day21.txt','r') as f:
+#         count=0
+#         for line in f:
+#             print(line.strip())
+#             #count+=type(line.strip())
+#             r1 = type2(line.strip())
+#             r2 = type(line.strip())
+#             if  r1 != r2:
+#                 print('fail')
+                
+#                 print(r1,r2)
+#                 exit()
+#             #print(count)
+#         #print(count)
+# part2()
