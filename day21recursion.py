@@ -107,7 +107,7 @@ for i in range(len(dirPad)):
 
                 dirMoves[dirPad[i][j]][dirPad[nx][ny]]=unique
 
-# generate all combinaition of numpad 
+# %%
 def allcombination(totype):
     res=[]
     def dfs(totype,combo,from_):
@@ -123,7 +123,6 @@ def allcombination(totype):
     #print(res)    
     return res
 
-#generate all combination of dirpad to type directions < ^ v > A 
 def dircombinations(totype):
     res=[]
     def dfs(totype,combo,from_):
@@ -138,6 +137,30 @@ def dircombinations(totype):
     dfs(totype,'','A')
     #print(res)    
     return res
+
+
+def chainvisual(seq,end):
+    minlen=float('inf')
+    minseq=''
+    def dfs(seq,i):
+        print(seq,len(seq))
+        if i == end:
+            nonlocal minseq,minlen
+            if len(seq) < minlen:
+                minseq=seq
+                minlen=len(seq)
+            return
+        for combo in dircombinations(seq):
+            #print(combo)
+            dfs(combo,i+1)
+        
+
+    dfs(seq,0)
+    print(minseq)
+    return minlen
+
+
+
 
 
 def chainRobot(letter,prev,end,seqstart):
