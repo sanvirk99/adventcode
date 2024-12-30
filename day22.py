@@ -1,3 +1,4 @@
+from collections import deque
 def mixMulti(multi,num):
     tomix = num * multi
     return num ^ tomix
@@ -24,15 +25,65 @@ def secretNumber(arr):
             n+=1
         yield num
 
+def eachNum(num,iterations):
+    n=0
+    dp=num%10
+    while n < iterations:
+        for func,val in operations:
+            num=mapfunc[func](val,num)
+        n+=1
+        change = num%10 - dp
+        dp = num%10
+        yield num%10,change
+
+def part1():
+    nums=[]
+    with open('input/day22.txt','r') as f: 
+        for line in f:
+            nums.append(int(line.strip()))
+
+    res=0
+    for val in secretNumber(nums):
+        res+=val
+    print(res)
 
 
 
-nums=[]
-with open('input/day22.txt','r') as f: 
-    for line in f:
-        nums.append(int(line.strip()))
+#find all maximums looking for repeating numbers
+#it takes the first sequence to occur if multiple consective should be ignored
 
-res=0
-for val in secretNumber(nums):
-    res+=val
-print(res)
+def part2():
+    que=deque()
+    mem={}
+    iterations=2000
+    with open('input/day22.txt','r') as f:
+        for line in f:
+            num=int(line.strip())
+            for secret in eachNum(num,iterations):
+                curprice,pricechange=secret
+                #print(f"{num:<10} {curprice:<1} {pricechange:<1}") 
+                que.appendleft(pricechange)
+                if len(que) == 4:
+                    #take snapshot anc count occurange
+                    mem[tuple(que)]=0
+                    que.pop()
+                
+    #print(len(unique))
+    with open('input/day22.txt','r') as f:
+       
+        for line in f:
+            num=int(line.strip()) 
+            seen=set()
+            for secret in eachNum(num,iterations):
+                curprice,pricechange=secret
+                #print(f"{num:<10} {curprice:<1} {pricechange:<1}") 
+                que.appendleft(pricechange)
+                if len(que) == 4:
+                    tque=tuple(que)
+                    if tque not in seen and tque in mem:
+                        mem[tque]+=curprice
+                        seen.add(tque)
+                    que.pop()
+
+    print(max(mem.values()),max(mem.keys(),key=lambda x:mem[x]))
+part2()
