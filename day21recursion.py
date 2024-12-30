@@ -179,20 +179,31 @@ def type(totype,depth):
             start=False
             prev=letter
         minlen=min(res,minlen)
+    #print(minlen)
     return minlen*int(totype[:-1])
 
 exampleinputs=['029A','980A','179A','456A','379A']
 
 def part1():
     count=0
-    for input in exampleinputs:
-        count+=type(input,depth=2) #two directional robots
-    
-    print(count)
+    with open('input/day21.txt') as f:
+        for line in f:
+            line=line.strip()
+            count+=type(line,depth=2)
+    print('input depth 2 ',count)
+
+def part2():
+    count=0
+    with open('input/day21.txt') as f:
+        for line in f:
+            line=line.strip()
+            count+=type(line,depth=25)
+    print('input depth 25 ',count)
         
 part1()
+part2()
 
-
+#print(type('026A',5))
 
 
 
