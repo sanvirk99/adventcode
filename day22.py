@@ -1,4 +1,5 @@
 from collections import deque
+input='input/day22.txt'
 def mixMulti(multi,num):
     tomix = num * multi
     return num ^ tomix
@@ -16,7 +17,7 @@ operations=[('mixMulti',64),('prune',0),('mixDiv',32),('prune',0),('mixMulti',20
 def secretNumber(arr):
    
     for num in arr:
-        n=0 
+        n=0
         while n < 2000:
             for func,val in operations:
                 #print(func,val)
@@ -25,6 +26,7 @@ def secretNumber(arr):
             n+=1
         yield num
 
+#return current price and the price change
 def eachNum(num,iterations):
     n=0
     dp=num%10
@@ -34,11 +36,11 @@ def eachNum(num,iterations):
         n+=1
         change = num%10 - dp
         dp = num%10
-        yield num%10,change
+        yield dp,change
 
 def part1():
     nums=[]
-    with open('input/day22.txt','r') as f: 
+    with open(input,'r') as f: 
         for line in f:
             nums.append(int(line.strip()))
 
@@ -56,7 +58,7 @@ def part2():
     que=deque()
     mem={}
     iterations=2000
-    with open('input/day22.txt','r') as f:
+    with open(input,'r') as f:
         for line in f:
             num=int(line.strip())
             for secret in eachNum(num,iterations):
@@ -69,7 +71,7 @@ def part2():
                     que.pop()
                 
     #print(len(unique))
-    with open('input/day22.txt','r') as f:
+    with open(input,'r') as f:
        
         for line in f:
             num=int(line.strip()) 
@@ -81,9 +83,10 @@ def part2():
                 if len(que) == 4:
                     tque=tuple(que)
                     if tque not in seen and tque in mem:
-                        mem[tque]+=curprice
+                        mem[tque] += curprice
                         seen.add(tque)
                     que.pop()
 
     print(max(mem.values()),max(mem.keys(),key=lambda x:mem[x]))
+
 part2()
