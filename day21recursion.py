@@ -138,31 +138,6 @@ def dircombinations(totype):
     #print(res)    
     return res
 
-
-def chainvisual(seq,end):
-    minlen=float('inf')
-    minseq=''
-    def dfs(seq,i):
-        print(seq,len(seq))
-        if i == end:
-            nonlocal minseq,minlen
-            if len(seq) < minlen:
-                minseq=seq
-                minlen=len(seq)
-            return
-        for combo in dircombinations(seq):
-            #print(combo)
-            dfs(combo,i+1)
-        
-
-    dfs(seq,0)
-    print(minseq)
-    return minlen
-
-
-
-
-
 def chainRobot(letter,prev,end,seqstart):
     
     mem={}
