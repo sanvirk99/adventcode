@@ -76,6 +76,7 @@ def part2():
         for line in f:
             num=int(line.strip()) 
             seen=set()
+            que.clear()
             for secret in eachNum(num,iterations):
                 curprice,pricechange=secret
                 #print(f"{num:<10} {curprice:<1} {pricechange:<1}") 
